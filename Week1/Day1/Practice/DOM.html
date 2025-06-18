@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM Manipulation Example</title>
+</head>
+<body>
+
+  <h1 id="title">Welcome!</h1>
+  <p class="description">This is a description paragraph.</p>
+  <ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+  </ul>
+
+  <script>
+    // Changing text content using getElementById
+    const title = document.getElementById('title');
+    title.textContent = "Hello, DOM!";
+
+    // Changing style using querySelector
+    const paragraph = document.querySelector('.description');
+    paragraph.style.color = "green";
+
+    // Iterating over elements using querySelectorAll
+    const listItems = document.querySelectorAll('li');
+    listItems.forEach((item, index) => {
+      item.textContent = `Updated Item ${index + 1}`;
+    });
+  </script>
+
+</body>
+</html>
