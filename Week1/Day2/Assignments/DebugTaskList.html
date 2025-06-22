@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Task List</title>
+</head>
+<body>
+  <input id="taskInput" type="text" placeholder="Enter task">
+  <button id="addTask">Add Task</button>
+  <ul id="taskList"></ul>
+
+  <script>
+    const addTaskButton = document.getElementById('addTask');
+    const taskInput = document.getElementById('taskInput');
+    const taskList = document.getElementById('taskList');
+
+    addTaskButton.onclick = function () {
+      const taskText = taskInput.value;
+      if (taskText.trim() === "") return;
+
+      const newTask = document.createElement('li');
+      newTask.innerHTML = taskText;
+      taskList.appendChild(newTask);
+      taskInput.value = "";
+    };
+
+    taskList.onclick = function (e) {
+      if (e.target.tagName === 'LI') {
+        e.target.remove();
+      }
+    };
+  </script>
+</body>
+</html>
+
+<!-- Bug fixes -->
+ <!-- 1.Replaced taskList.append(...) with taskList.appendChild(...) → .appendChild() is the correct method for adding a node.
+      2.Corrected the condition if (e.tagName === 'LI') to if (e.target.tagName === 'LI') ->we need to check the actual clicked element (e.target), not the event object.
+      3. Optional cleanup: Clear input field after adding a task. -->
