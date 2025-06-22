@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1 id="parent">I'm a Heading tag</h1>
+     </div>
+     <div class="container">I am a div tag
+
+     </div>
+    <p>Hey there </p>
+    <p>Helloo</p>
+    <p>Good bye</p>
+</body>
+</html>
+<script>
+let heading=document.getElementById('parent')
+heading.innerText="Welcome to the DOM World!."
+
+let HTMLCollection=document.getElementsByTagName('p')
+for(let i=0;i<HTMLCollection.length;i++){
+    HTMLCollection[i].style.color="blue"
+}
+console.log(document.querySelector('.container').style.color="orange")
+
+</script>
