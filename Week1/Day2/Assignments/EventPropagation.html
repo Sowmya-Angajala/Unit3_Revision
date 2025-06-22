@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Propagation Exploration</title>
+  <style>
+    .outer, .middle, .inner {
+      padding: 40px;
+      margin: 10px;
+      border: 2px solid black;
+    }
+
+    .outer {
+      background-color: #e0f7fa;
+    }
+
+    .middle {
+      background-color: #b2ebf2;
+    }
+
+    .inner {
+      background-color: #80deea;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="outer" id="outer">
+    Outer Div
+    <div class="middle" id="middle">
+      Middle Div
+      <div class="inner" id="inner">
+        Inner Div
+        <button id="innerBtn">Inner Button</button>
+      </div>
+      <button id="middleBtn">Middle Button</button>
+    </div>
+    <button id="outerBtn">Outer Button</button>
+  </div>
+
+  <script>
+    
+
+    function logEvent(name) {
+      return function (e) {
+        alert(`${name} clicked`);
+      };
+    }
+
+    // Add event listeners to DIVs in both capturing and bubbling phases
+    document.getElementById('outer').addEventListener('click', () => alert('Outer DIV - Bubbling'), false);
+    document.getElementById('outer').addEventListener('click', () => alert('Outer DIV - Capturing'), true);
+
+    document.getElementById('middle').addEventListener('click', () => alert('Middle DIV - Bubbling'), false);
+    document.getElementById('middle').addEventListener('click', () => alert('Middle DIV - Capturing'), true);
+
+    document.getElementById('inner').addEventListener('click', () => alert('Inner DIV - Bubbling'), false);
+    document.getElementById('inner').addEventListener('click', () => alert('Inner DIV - Capturing'), true);
+
+    // Button Clicks (bubble only)
+    document.getElementById('outerBtn').addEventListener('click', () => alert('Outer Button clicked'));
+    document.getElementById('middleBtn').addEventListener('click', () => alert('Middle Button clicked'));
+
+    // Inner button: shows alert and stops propagation
+    document.getElementById('innerBtn').addEventListener('click', function (e) {
+      alert('Inner Button clicked - Stopping propagation');
+      e.stopPropagation(); // Stops both bubbling and capturing beyond this point
+    });
+  </script>
+
+</body>
+</html>
+<!-- // Explanation:
+    // Event Propagation has two main phases:
+    // 1. Capturing Phase: Events travel from the root to the target element.
+    // 2. Bubbling Phase: Events bubble back from the target to the root. -->
