@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fake Store Product Grid</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 4-column grid */
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .product-card {
+      background-color: #fff;
+      border: 4px solid;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .product-card:hover {
+      transform: scale(1.02);
+    }
+
+    .green-border {
+      border-color: #4CAF50; /* Green for <= $50 */
+    }
+
+    .yellow-border {
+      border-color: #FFC107; /* Yellow for > $50 */
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: contain;
+    }
+
+    .product-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .product-price {
+      color: #333;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Fake Store Products</h2>
+  <div class="grid-container" id="productGrid"></div>
+
+  <script>
+    fetch('https://fakestoreapi.com/products')
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById("productGrid");
+
+        data.forEach(product => {
+          const card = document.createElement("div");
+          card.classList.add("product-card");
+
+          if (product.price > 50) {
+            card.classList.add("yellow-border");
+          } else {
+            card.classList.add("green-border");
+          }
+
+          card.innerHTML = `
+            <img src="${product.image}" alt="${product.title}">
+            <div class="product-title">${product.title}</div>
+            <div class="product-price">Price: $${product.price}</div>
+          `;
+
+          container.appendChild(card);
+        });
+      })
+      .catch(error => {
+        console.error("Error fetching data:", error);
+      });
+  </script>
+
+</body>
+</html>
