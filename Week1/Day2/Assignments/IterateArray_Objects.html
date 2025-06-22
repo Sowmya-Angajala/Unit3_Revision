@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Grid</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 3 columns */
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .product-card {
+      padding: 15px;
+      border-radius: 8px;
+      color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .green {
+      background-color: #4CAF50; /* In Stock */
+    }
+
+    .red {
+      background-color: #F44336; /* Out of Stock */
+    }
+
+    .label {
+      font-weight: bold;
+      margin-top: 8px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Product Grid</h2>
+  <div class="grid-container" id="productGrid"></div>
+
+  <script>
+    const products = [
+      { id: 1, name: "Product A", price: 50, inStock: true },
+      { id: 2, name: "Product B", price: 30, inStock: false },
+      { id: 3, name: "Product C", price: 70, inStock: true },
+      { id: 4, name: "Product D", price: 20, inStock: false },
+      { id: 5, name: "Product E", price: 90, inStock: true },
+      { id: 6, name: "Product F", price: 40, inStock: false }
+    ];
+
+    const container = document.getElementById("productGrid");
+
+    products.forEach(product => {
+      const card = document.createElement("div");
+      card.classList.add("product-card");
+
+      // Conditional styling based on inStock
+      if (product.inStock) {
+        card.classList.add("green");
+      } else {
+        card.classList.add("red");
+      }
+
+      card.innerHTML = `
+        <h3>${product.name}</h3>
+        <p>Price: $${product.price}</p>
+        <span class="label">${product.inStock ? "In Stock" : "Out of Stock"}</span>
+      `;
+
+      container.appendChild(card);
+    });
+  </script>
+
+</body>
+</html>
