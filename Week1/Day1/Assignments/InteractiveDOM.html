@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dynamic Div Update</title>
+  <style>
+    #targetDiv {
+      width: 300px;
+      height: 150px;
+      background-color: lightgray;
+      margin-top: 20px;
+      padding: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Change Div Background and Text</h2>
+
+  <!--  Input for color name -->
+  <input type="text" id="colorInput" placeholder="Enter color name (e.g., red)">
+  <button id="changeColorBtn">Change Background</button>
+  <br><br>
+
+  <!--  Input for new text -->
+  <input type="text" id="textInput" placeholder="Enter new text">
+  <button id="updateTextBtn">Update Text</button>
+
+  <!--  Target div -->
+  <div id="targetDiv">This is the default content of the div.</div>
+
+  <script>
+    // Get references to DOM elements
+    const colorInput = document.getElementById("colorInput");
+    const textInput = document.getElementById("textInput");
+    const changeColorBtn = document.getElementById("changeColorBtn");
+    const updateTextBtn = document.getElementById("updateTextBtn");
+    const targetDiv = document.getElementById("targetDiv");
+
+    // Function to validate color using a temporary element
+    function isValidColor(color) {
+      const testElement = document.createElement("div");
+      testElement.style.color = color;
+      return testElement.style.color !== '';
+    }
+
+    //  Handle Change Background button click
+    changeColorBtn.addEventListener("click", function() {
+      const colorValue = colorInput.value.trim().toLowerCase();
+
+      if (isValidColor(colorValue)) {
+        targetDiv.style.backgroundColor = colorValue;
+      } else {
+        alert("Invalid color name!");
+      }
+    });
+
+    //  Handle Update Text button click
+    updateTextBtn.addEventListener("click", function() {
+      const newText = textInput.value.trim();
+
+      if (newText === "") {
+        alert("Please enter some text!");
+      } else {
+        targetDiv.textContent = newText;
+      }
+    });
+  </script>
+
+</body>
+</html>
